@@ -12,12 +12,14 @@ print(device)
 class my_yoloV1(nn.Module):
     def __init__(self, S, B, C):
         """
-        + describe
+        - Describe
             constructor of this class and create yoloV1 architecture
-        + input
-            S (int) : number of grid cell = (S * S)
-            B (int) : number of bounding box per grid cell
-            c (int) : number of class in dataset 
+        - Input
+            + S (int) : number of grid cell = (S * S)
+            + B (int) : number of bounding box per grid cell
+            + c (int) : number of class in dataset 
+        - Output
+            None
         """
 
         super(my_yoloV1, self).__init__()

@@ -2,15 +2,15 @@ import torch
 
 def IoU(pred_box, groundT_box, bbox_format = "yolo_format"):
     """
-    - describe
+    - Describe
         use for calculate Intersect over Union (IoU)
-    - input
+    - Input
         + pred_box (tensor) (N * 4)  predicted bounding box from model ; N is batch_size
         + groundt_box (tensor) (N * 4) : ground truth bounding box from model ; N is batch_size
         + bbox_format (string) : choose bounding box format 1.) "yolo_format" : [cx, cy, width, height]  ; cx, cy is center of bounding box
                                                             2.) "coco_format" : [x_min, y_min, width, height]
                                                             3.) "pascal_format" : [x_min, y_min, x_max, y_max]
-    - output
+    - Output
         + iou (tensor) (N * 1) : IoU value 
     """
     if bbox_format == "yolo_format":
