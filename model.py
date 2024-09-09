@@ -11,8 +11,16 @@ print(device)
 
 class my_yoloV1(nn.Module):
     def __init__(self, S, B, C):
-        super(my_yoloV1, self).__init__()
+        """
+        + describe
+            constructor of this class and create yoloV1 architecture
+        + input
+            S (int) : number of grid cell = (S * S)
+            B (int) : number of bounding box per grid cell
+            c (int) : number of class in dataset 
+        """
 
+        super(my_yoloV1, self).__init__()
         self.architechture = nn.Sequential(
             nn.Conv2d(3, 64, 7, stride=2, padding=3),
             nn.LeakyReLU(0.1, inplace=True),
