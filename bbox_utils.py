@@ -11,7 +11,7 @@ def IoU(pred_box, groundT_box, bbox_format = "yolo_format"):
                                                             2.) "coco_format" : [x_min, y_min, width, height]
                                                             3.) "pascal_format" : [x_min, y_min, x_max, y_max]
     - Output
-        + iou (tensor) (N * 1) : IoU value 
+        + iou (tensor) (N * 1) : IoU value ; N is batch_size
     """
     if bbox_format == "yolo_format":
         b1_x1 = pred_box[..., 0:1] - pred_box[..., 2:3] / 2
@@ -28,12 +28,10 @@ def IoU(pred_box, groundT_box, bbox_format = "yolo_format"):
         b1_y1 = pred_box[..., 1:2]
         b1_x2 = pred_box[..., 0:1] + pred_box[..., 2:3]  # x_min + width
         b1_y2 = pred_box[..., 1:2] + pred_box[..., 3:4]  # y_min + height
-
         b2_x1 = groundT_box[..., 0:1]
         b2_y1 = groundT_box[..., 1:2]
         b2_x2 = groundT_box[..., 0:1] + groundT_box[..., 2:3]  # x_min + width
         b2_y2 = groundT_box[..., 1:2] + groundT_box[..., 3:4]  # y_min + height
-
 
     if bbox_format == "pascal_format":
         b1_x1 = pred_box[..., 0:1]
@@ -57,7 +55,7 @@ def IoU(pred_box, groundT_box, bbox_format = "yolo_format"):
 
     iou = intersec_area / ((b1_area + b2_area) - intersec_area)
     
-    # print(iou)
+    print(iou.shape)
     return iou
 
 if __name__ == "__main__":
