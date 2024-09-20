@@ -7,7 +7,7 @@ def IoU(pred_box, groundT_box, bbox_format = "yolo_format"):
     - Input
         + pred_box (tensor) (N * 4)  predicted bounding box from model ; N is batch_size
         + groundt_box (tensor) (N * 4) : ground truth bounding box from model ; N is batch_size
-        + bbox_format (string) : choose bounding box format 1.) "yolo_format" : [cx, cy, width, height]  ; cx, cy is center of bounding box
+        + bbox_format (string) : choose bounding box format 1.) "yolo_format" : [cx, cy, width, height]  ; cx, cy is center of bounding box and all value is normalize to image size = range[0-1]
                                                             2.) "coco_format" : [x_min, y_min, width, height]
                                                             3.) "pascal_format" : [x_min, y_min, x_max, y_max]
     - Output
@@ -55,12 +55,12 @@ def IoU(pred_box, groundT_box, bbox_format = "yolo_format"):
 
     iou = intersec_area / ((b1_area + b2_area) - intersec_area)
     
-    print(iou.shape)
+    # print(iou.shape)
     return iou
 
 if __name__ == "__main__":
     # pascal_format
-    # a = [[100, 50, 300,200]]
+    # a = [[100, 50, 300, 200]]
     # b = [[120, 80, 310, 220]]
 
     # yolo_format
@@ -73,4 +73,4 @@ if __name__ == "__main__":
     #
     x = torch.tensor(a)
     y = torch.tensor(b)
-    IoU(x, y, "coco_format")
+    print(IoU(x, y, "coco_format"))
