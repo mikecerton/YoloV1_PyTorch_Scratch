@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 from torchsummary import summary
 
-class my_yoloV1(nn.Module):
+class YoloV1_Model(nn.Module):
     def __init__(self, S, B, C):
         """
         - Describe
@@ -16,7 +16,7 @@ class my_yoloV1(nn.Module):
             None
         """
 
-        super(my_yoloV1, self).__init__()
+        super(YoloV1_Model, self).__init__()
         self.feature = nn.Sequential(
             nn.Conv2d(3, 64, 7, stride=2, padding=3),
             nn.LeakyReLU(0.1, inplace=True),
@@ -89,9 +89,9 @@ class my_yoloV1(nn.Module):
         - Describe
             forward propogation of model
         - Input
-            + x (tensor) (N * 3, 448, 448) : picture size 448 * 448 in tensor ; N is batch_size
+            + x (tensor) [N, 3, 448, 448] : picture size 448 * 448 in tensor ; N is batch_size
         - Output
-            + x (tensor) (N * 1470) : predicted output in yolo label ; N is batch_size
+            + x (tensor) [N, 1470] : predicted output in yolo label ; N is batch_size
         """
 
         x = self.feature(x)
@@ -109,7 +109,7 @@ if __name__ == "__main__":
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(device)
     
-    test = my_yoloV1(S = 7, B = 2, C = 20).to(device)
+    test = YoloV1_Model(S = 7, B = 2, C = 20).to(device)
     # print(test)
 
     summary(test, (3, 448, 448))
