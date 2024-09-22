@@ -15,7 +15,6 @@ class YoloV1_Model(nn.Module):
         - Output
             None
         """
-
         super(YoloV1_Model, self).__init__()
         self.feature = nn.Sequential(
             nn.Conv2d(3, 64, 7, stride=2, padding=3),
